@@ -6,10 +6,10 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32.3
+// @version     0.32.31
 // ==/UserScript==
 
-// Fix chrome1
+
 Main.k = function() {};
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
@@ -142,7 +142,7 @@ Main.k.setuptranslations = function() {
 
 
 
-	/********* ENGLISH ************/
+/********* ENGLISH ************/
 	var text = {};
 	text.menuPlay = "Play";
 	text.menuAccount = "My account";
@@ -168,7 +168,7 @@ Main.k.setuptranslations = function() {
 	text.menuForumAdviceId = 112222;
 	text.menuForumLounge = "Lounge";
 	text.menuForumLoungeId = 112216;
-	text.menuForumOfficers = "Officiers";
+	text.menuForumOfficers = "Officers";
 	text.menuForumOfficersId = 104918;
 
 
@@ -194,31 +194,36 @@ Main.k.setuptranslations = function() {
 
 	// Titles
 	text.TITLES = {
-		commander: ["Commander", "TODO"],
+		commander: ["Commander", "Commander decides which planets the Daedalus will explore."],
 		comms: ["Comms Manager", "The Communications manager can start to contact others once contact with Sol is re-established."],
-		admin: ["NERON Admin", "TODO"]
+		admin: ["NERON Admin", "Responsible for NERON, seems to have some influence on the onboard computer. Notably, is the only one to be able to send messages to the entire crew."]
 	};
 
 	// Ctrl+W options'
 	text.optionsWarning = "More options will be available later.";
 	text.options = [
-		"Use custom styling for messages (colored border and name + background image.",
-		"Simplify custom styling (don't display background images).",
-		"Display Mush logo (above tabs).",
-		"Add line breaks between NERON projects, research projects and Pilgred."
+		"Use custom styling for messages. (Colored border and name, BG image)",
+		"Simplify custom styling. (Don't display BG images)",
+		"Display Mush logo. (Above tabs)",
+		"Add line breaks between NERON projects, research projects, and PILGRED."
 	];
 	
 	//Astropad
 	text.astroUpdated = 'Astropad synchronised.';
 	
 	// Misc text
-	text.needPageReload = " Page reload needed.";
+	text.needPageReload = "Page reload needed.";
 	text.about = "about";
 	text.tools = "tools";
 	text.titles = "titles";
 	text.crew = "crew members";
 	text.shelf = "shelf content";
 	text.aboutTip = "Click here for more informations on Ctrl+W.";
+	text.connected = "Connected";
+	text.shareInventory = "Inserts the inventory of the room in the active text box using the form&nbsp;:</p><p><strong>Room :</strong> <i>Item</i>, <i>Item</i>, <i>Item</i>, <i>Item</i></p><p><strong>Also shares on Astropad, if it is installed.</strong></p>"
+	
+	text.lastVersionInstalled = "Last version of CTRL+W installed (%s) :";
+	text.autoUpdateOk = 'Thank you !';
 
 	text.loads = "loads";
 	text.empty = "empty";
@@ -240,7 +245,7 @@ Main.k.setuptranslations = function() {
 		"Chief Communications Officer and former political activist.",
 		"[TODO: CHAO]",
 		"[TODO: FINOLA]",
-		"[TODO: STEPHEN]",
+		"The most dangerous cook in history. Keep your fingers out of his soup!",
 		"Flexible fructivorous researcher. Better living through botany!",
 		"[TODO: CHUN]",
 		"[TODO: RALUCA]",
@@ -275,7 +280,7 @@ Main.k.setuptranslations = function() {
 Main.k.setuptranslations();
 /************************* /TRANSLATIONS **********************/
 
-// Fix chrome2
+
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -4360,16 +4365,16 @@ Main.k.tabs.playing = function() {
 
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> Msg Manager", null, null, "Message Manager",
-			"Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu.")
+			"Never miss a message! All topics with unread messages will be highlighted, and you can search by author or content.")
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Manager.open);
 
 		// Options Manager
-		Main.k.MakeButton("<img src='/img/icons/ui/pa_eng.png' style='vertical-align: -20%' /> Options", null, null, "Gérer les options", "Certaines fonctionnalitées de Ctrl+W sont configurables. Cliquez ici pour spécifier vos préférences.")
+		Main.k.MakeButton("<img src='/img/icons/ui/pa_eng.png' style='vertical-align: -20%' /> Options", null, null, "Manage options", "Some features of Ctrl + W are configurable. Click here to specify your preferences.")
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Options.open);
 
 		// Page reloader
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> Actualiser", null, null, "Actualiser",
-			"Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>")
+			"Refreshes page without reloading it. <strong>Function being optimized.</strong>")
 		.appendTo(leftbar).find("a").on("mousedown", function() {
 			// TODO: loading screen -- Optimize
 
@@ -4411,7 +4416,7 @@ Main.k.tabs.playing = function() {
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire",
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Share", null, null, "Share inventory",
 			Main.k.text.shareInventory
 		).appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
